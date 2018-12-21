@@ -1,0 +1,25 @@
+{
+  "name": "puppeteer_learn",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaopf/puppeteer_learn.git"
+  },
+  "keywords": [
+    "puppeteer"
+  ],
+  "author": "xiaopf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaopf/puppeteer_learn/issues"
+  },
+  "homepage": "https://github.com/xiaopf/puppeteer_learn#readme",
+  "dependencies": {
+    "puppeteer": "^1.11.0"
+  }
+}
