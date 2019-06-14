@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/xiaopf/puppeteer_learn#readme",
   "dependencies": {
-    "puppeteer": "^1.11.0"
+    "puppeteer": "^1.17.0"
   }
 }
