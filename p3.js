@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const slog = require('single-line-log').stdout;
 var list = [];
 
 async function getDirectory(){
@@ -55,15 +56,13 @@ async function getPlayList(item, index, len, listPart){
                 reslove(singlePlayList)
             })
         });
-        
-        console.log(index+1)
+
         listPart[index]['playList'] = playList;
         await browser.close();
     } catch (err) {
         console.log(err)
     }
-    // console.clear();
-    console.log(Math.floor((index+1) * 100/len) + '%');
+    slog(Math.floor((index+1) * 100/len) + '%');
 }
 
 

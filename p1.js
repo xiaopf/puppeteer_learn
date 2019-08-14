@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const slog = require('single-line-log').stdout;
-
+// node-schedule
 function timeout(ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
@@ -37,14 +37,13 @@ async function load() {
     console.log('进入登录页面')
     await page.waitFor(1000);
     // 输入账号密码点击登录
-    await page.type('#userName', 'fengchaofan', { delay: 50 })
-    await page.type('#password', 'fengchaofan', { delay: 50 })
+    await page.type('#userName', 'test01', { delay: 50 })
+    await page.type('#password', '123456', { delay: 50 })
     await page.click('.login-form-button')
     
     await page.waitFor('.ant-card-body');
     await page.waitFor('.echarts-for-react');
     console.log('进入首页')
-    await page.click('.ant-notification-notice-close')//页面问题
     await page.waitFor(5000);
 
     let imgName = (new Date()).getTime();

@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const slog = require('single-line-log').stdout;
-
+const date = new Date();
+const timestap = + date;
 function timeout(ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
@@ -30,26 +31,23 @@ async function load() {
         args: ['--start-maximized'],//设置浏览器打开时的大小
     });
     const page = await browser.newPage();
-    const timestap = + new Date();
-    await page.goto('http://172.16.2.38:3007/#/login');
+    await page.goto('http://test.boss.majiang01.com:8181/#/login');
     await page.waitFor('#userName');
     clearInterval(timer)
     slog('')//清空
     console.log('进入登录页面')
     await page.waitFor(1000);
     // 输入账号密码点击登录
-    await page.type('#userName', 'fengchaofan', { delay: 10 })
-    await page.type('#password', 'fengchaofan', { delay: 10 })
+    await page.type('#userName', 'test01', { delay: 10 })
+    await page.type('#password', '123456', { delay: 10 })
     await page.waitFor(200);
     await page.click('.login-form-button')
 
     await page.waitFor('.ant-card-body');
     await page.waitFor('.echarts-for-react');
+    slog('')//清空
     console.log('进入首页')
-    await page.waitFor(2000);
-
-    // 点击侧边栏进入贵阳gmt
-    // const pp = await page.$$('.ant-menu-submenu')[1]
+    await page.waitFor(3000);
 
     // 点击进入贵阳gmt
     await page.click('#app-gmtGuiyang')
@@ -73,7 +71,10 @@ async function load() {
     // 发送日期
     await page.click("#delaySendDate .ant-calendar-picker-input")
     await page.waitFor(200);
-    await page.click("[title='2019年7月5日']")
+
+    const month = date.getMonth() 
+    const day = date.getDate()
+    await page.click(`[title='2019年${month + 1}月${day}日']`)
     await page.waitFor(200);
     await page.click(".ant-calendar-footer-btn .ant-calendar-ok-btn")
     await page.waitFor(200);
@@ -88,20 +89,19 @@ async function load() {
     await page.waitFor(200);
     // 发送
     await page.click(".btn_group [type='submit']")
-    await page.waitFor(1000);
+    await page.waitFor(2000);
 
     // 验证是否成功 
-    let result = await page.$$eval('.ant-table-row', els => {
+    let result = await page.$$eval('.ant-table-row', (els, timestap) => {
         return new Promise(reslove => {
             let result = els[0].querySelectorAll('td')[2].innerText === `我是自动测试${timestap}`;
             reslove(result)
         })
-    })
-    
+    }, timestap) //传参数
+    // 把添加的数据删除
+    await page.click('.operate_btn:nth-child(2)')
+    console.log("添加的数据已删除")
     console.log(result ? "发送测试通过" : "发送有bug")
-
-
-    
     await browser.close();
 })();
 
