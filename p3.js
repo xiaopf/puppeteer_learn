@@ -72,33 +72,9 @@ function timeout(ms) {
     });
 }
 
-
-
-
-
-
 (async () => {
     await getDirectory();
-    
-    // let i = 0;
-
-    // let listPart = list.slice(0,3)
-
-
     let len = list.length;
-
-
-    // let timer = setInterval(async () => {
-    //     await getPlayList(listPart[i], i, len, listPart);
-    //     i ++;
-    //     if (i >= len){
-    //         clearInterval(timer);
-    //         let writerStream = fs.createWriteStream('./static/play_list.json');
-    //         writerStream.write(JSON.stringify(listPart), 'UTF8');
-    //         writerStream.end();
-    //         console.log('完成！');
-    //     }   
-    // }, 2000);
 
     for (let i = 0 ; i < len; i ++) {
         await getPlayList(list[i], i, len, list);

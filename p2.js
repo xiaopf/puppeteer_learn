@@ -1,6 +1,4 @@
 const puppeteer = require('puppeteer');
-const nodemailer = require('nodemailer');
-const path = require('path');
 const slog = require('single-line-log').stdout;
 const date = new Date();
 const timestap = + date;

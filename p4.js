@@ -23,3 +23,5 @@ const iPhone = devices['iPhone 8'];
     await page.waitFor(2000)
     await browser.close();
 })();
+
+
